@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tp3/home/home_screen.dart';
 import 'package:tp3/provider/user_provider.dart';
-import 'package:tp3/widgets/Values.dart';
-import 'package:tp3/widgets/app_library.dart';
 import 'package:email_validator/email_validator.dart';
 
 
@@ -20,30 +18,35 @@ class Connexion extends StatefulWidget {
 class _ConnexionState extends State<Connexion> {
   String email = "";
   String password = "";
+  String username = "";
   final _formkey = GlobalKey<FormState>();
-
   Future <void> submitForm()async {
     UserProvider userProvider = Provider.of<UserProvider>(context, listen: false);
-    final _result = await userProvider.signInWithEmailAndPassword(email, password);
-    if (_result != null) {
-      Navigator.pushNamed(context, HomeScreen.routeName);
+    if(_formkey.currentState!.validate()){
+      final _result = await userProvider.signInWithEmailAndPassword(email, password);
+      username = await userProvider.fetchUsername();
+      if (_result != null) {
+        Navigator.pushNamed(context, HomeScreen.routeName, arguments: username);
+      }
+      else{
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('mot de passe invalide'), backgroundColor: Colors.red,),
+        );
+      }
     }
-    else{
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('mot de passe invalide'), backgroundColor: Colors.red,),
-      );
-    }
+
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("TWISTIC"),
+      appBar: AppBar(title: const Text("TRANSMUSICAL"),
         backgroundColor: Colors.blueGrey,
       ),
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 200.0,horizontal: 40.0),
           child: Form(
+            key: _formkey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -57,11 +60,11 @@ class _ConnexionState extends State<Connexion> {
                   onChanged: (value)=> email = value,
                 ),
 
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextFormField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       labelText: "password",
                       border: OutlineInputBorder()
                   ),

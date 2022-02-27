@@ -1,12 +1,10 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 import 'package:tp3/form/connexion.dart';
 import 'package:tp3/home/home_screen.dart';
 import 'package:tp3/provider/user_provider.dart';
-import 'package:tp3/widgets/Values.dart';
 class Inscription extends StatefulWidget {
   static const String routeName = '/inscription';
   const Inscription({Key? key}) : super(key: key);
@@ -23,9 +21,9 @@ class _InscriptionState extends State<Inscription> {
 Future<void> submitForm()async {
   UserProvider userProvider = Provider.of<UserProvider>(context,listen: false);
   if(_formkey.currentState!.validate()){
-    final _result =  await userProvider.registerWithEmailAndPassword( email,password,username);
+    final _result =  await userProvider.registerWithEmailAndPassword(email,password,username);
     if(_result != null) {
-      Navigator.pushNamed(context, HomeScreen.routeName);
+      Navigator.pushNamed(context, HomeScreen.routeName,arguments: username);
     }
     else{
       ScaffoldMessenger.of(context).showSnackBar(
@@ -37,7 +35,7 @@ Future<void> submitForm()async {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: AppBar(title: const Text("TWISTIC"),
+      appBar: AppBar(title: const Text("TRANSMUSICAL"),
         backgroundColor: Colors.blueGrey,
       ),
       body: SingleChildScrollView(

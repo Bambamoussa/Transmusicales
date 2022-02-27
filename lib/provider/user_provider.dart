@@ -1,18 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:tp3/auth_firebase.dart';
-import 'package:tp3/model/user.dart';
 
 class UserProvider extends ChangeNotifier {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
-
+  String _username = "";
 
   Future signInWithEmailAndPassword(String email, String password ) async {
     try {
       final result = await _auth.signInWithEmailAndPassword(email: email, password: password);
+
+
       return result.user;
     }  on FirebaseAuthException  catch(e) {
        if(e.code == "user-not-found") {
@@ -22,6 +21,10 @@ class UserProvider extends ChangeNotifier {
         print("wrong password provided for that user");
        }
     }
+  }
+  Future <String> fetchUsername()async {
+   _username = _auth.currentUser!.displayName!;
+   return _username;
   }
 
   Future   registerWithEmailAndPassword(String email, String password, String username) async {

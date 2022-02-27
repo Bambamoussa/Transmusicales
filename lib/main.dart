@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tp3/form/inscription.dart';
+import 'package:tp3/provider/artiste_provider.dart';
 import 'package:tp3/provider/user_provider.dart';
 
 import 'form/connexion.dart';
@@ -21,6 +22,7 @@ class Twistic extends StatefulWidget {
 }
   class _TwisticState extends State<Twistic> {
   final UserProvider userProvider = UserProvider();
+  final ArtisteProvider artisteProvider = ArtisteProvider();
 
   @override
   void initState() {
@@ -31,6 +33,7 @@ class Twistic extends StatefulWidget {
     return  MultiProvider(
         providers:  [
         ChangeNotifierProvider.value(value: userProvider),
+          ChangeNotifierProvider.value(value: artisteProvider),
       ],
       child:  MaterialApp(
         debugShowCheckedModeBanner: false,
