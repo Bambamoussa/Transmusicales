@@ -1,7 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tp3/aristes/artiste_details.dart';
 import 'package:tp3/form/inscription.dart';
+import 'package:tp3/model/Artiste.dart';
+import 'package:tp3/player/player_page.dart';
 import 'package:tp3/provider/artiste_provider.dart';
 import 'package:tp3/provider/user_provider.dart';
 
@@ -39,9 +42,11 @@ class Twistic extends StatefulWidget {
         debugShowCheckedModeBanner: false,
         routes: {
           '/':(_)=>  Connexion(),
-          '/home': (_) => HomeScreen(),
+          HomeScreen.routeName: (_) => HomeScreen(),
           //Connexion.routeName:(_)=>  Connexion(),
           Inscription.routeName :(_)=> Inscription(),
+          ArtistesDetails.routeName:(_)=>  ArtistesDetails(),
+          Player.routeName:(_)=> Player()
         },
 
       ),

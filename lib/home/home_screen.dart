@@ -24,10 +24,10 @@ class _HomeState extends State<HomeScreen>{
   Widget build(BuildContext context) {
     final String _username = ModalRoute.of(context)!.settings.arguments as String  ;
       final _artiste = Provider.of<ArtisteProvider>(context);
-      final  _listArtiste = _artiste.fetchArtistes();
+      final  _listArtiste = _artiste.fetchAllArtistes();
     return Scaffold(
       appBar: AppBar(title: const Text("TRANSMUSICAL"),
-                backgroundColor: Colors.blueGrey,
+                backgroundColor: Colors.blue,
       ),
       backgroundColor:  Colors.blueGrey,
       body: StreamBuilder(
@@ -38,7 +38,7 @@ class _HomeState extends State<HomeScreen>{
               child: CircularProgressIndicator(),
             );
           }
-          final _artiste = snapshot.data!.docs.map((data) => data).toList();
+          final _artiste = snapshot.data!.docs.map((data) => data ).toList();
           return  ArtisteListe(artisteList: _artiste);
         },
       ),

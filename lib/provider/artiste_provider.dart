@@ -8,28 +8,35 @@ import 'package:flutter/foundation.dart';
 
 
 class ArtisteProvider extends ChangeNotifier {
-  FirebaseDatabase _database = FirebaseDatabase.instance;
+  final FirebaseFirestore _database = FirebaseFirestore.instance;
   List<DatabaseEvent> _artistes = [];
 
 
   UnmodifiableListView<DatabaseEvent> get artistes => UnmodifiableListView(_artistes);
 
 
-    fetchArtistes()  {
+    fetchAllArtistes()  {
     try {
-       return FirebaseFirestore.instance.collection('artiste').snapshots();
+       return _database.collection('artiste').snapshots();
     }catch(e){
        print("Failed to add artiste: $e");
     }
   }
 
+  fetchArtiste(String search ) async{
+     try {
+       var _result = await _database
+           .collection("artiste")
+           .where("annee", isEqualTo: search)
+           .snapshots().toList();
+        return _result;
+     } catch(e){
+       print("Failed to add artiste: $e");
+     }
+  }
+
   Future<void>allData() async {
 
-    DatabaseReference ref = _database.ref("fields");
-    DatabaseEvent event = await ref.once();
-    print(event.snapshot.value);
-    artistes.add(event);
-    notifyListeners();
 
   }
 

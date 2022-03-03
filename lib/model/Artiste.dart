@@ -10,12 +10,12 @@ class Artiste {
   DateTime record_timestamp;
   Artiste({required this.datasetid, required this.recordid, required this.fields, this.geometry , required this.record_timestamp});
 
-  Artiste.fromJson(Map<String,dynamic> json):
-        datasetid = json['datasetid'] as String,
-        recordid = json['recordid'] as String,
-        fields = json['fields'] as Map<String,dynamic>,
-        geometry = json['geometry'] as Map<String,dynamic>,
-        record_timestamp =json['record_timestamp'] as DateTime;
+  Artiste.fromJson(QueryDocumentSnapshot  <Map<String,dynamic>> json):
+        datasetid = json.data()!['datasetid'] as String,
+        recordid = json.data()!['recordid'] as String,
+        fields = json.data()!['fields'] as Map<String,dynamic>,
+        geometry = json.data()!['geometry'] as Map<String,dynamic>,
+        record_timestamp =json.data()!['record_timestamp'] as DateTime;
 
 
 }

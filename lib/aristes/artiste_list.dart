@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tp3/model/Artiste.dart';
+
+import 'artiste_details.dart';
+
 
 class ArtisteListe extends StatelessWidget {
   final List  artisteList;
@@ -18,7 +20,9 @@ class ArtisteListe extends StatelessWidget {
               leading: const CircleAvatar(child: Icon(Icons.person)),
               title: Text(_artiste["fields"]["artistes"], style: Theme.of(context).textTheme.bodyText1,),
               subtitle:_artiste["fields"]["edition"] != null? Text(_artiste["fields"]["edition"]):const Text("inconnu"),
-            ));
+              onTap:() => Navigator.pushNamed(context, ArtistesDetails.routeName , arguments: _artiste),
+            ),
+            );
           }
       ),
     );
