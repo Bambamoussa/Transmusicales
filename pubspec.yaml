@@ -43,6 +43,7 @@ dependencies:
   email_validator: ^2.0.1
   firebase_database: ^9.0.6
   google_fonts: 2.0.0
+  url_launcher: ^6.0.20
 
 dev_dependencies:
   flutter_test:

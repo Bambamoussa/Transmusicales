@@ -27,6 +27,11 @@ class UserProvider extends ChangeNotifier {
    return _username;
   }
 
+  fetchUserEmail(){
+    final _email = _auth.currentUser!.email!;
+    return _email;
+  }
+
   Future   registerWithEmailAndPassword(String email, String password, String username) async {
     try {
       final  result =

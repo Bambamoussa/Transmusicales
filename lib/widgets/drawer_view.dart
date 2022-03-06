@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tp3/aristes/listeFavoris.dart';
 import 'package:tp3/form/connexion.dart';
 import 'package:tp3/provider/user_provider.dart';
 
@@ -42,6 +43,13 @@ class DrawerView extends StatelessWidget {
             onTap: () {
               userProvider.signOut();
               Navigator.pushNamed(context, Connexion.routeName);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.person_add_disabled),
+            title: const Text('favoris',style: TextStyle(fontSize: 20)),
+            onTap: () {
+              Navigator.pushNamed(context, ListeFavoris.routeName);
             },
           ),
         ],

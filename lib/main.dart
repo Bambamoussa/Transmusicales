@@ -8,6 +8,7 @@ import 'package:tp3/player/player_page.dart';
 import 'package:tp3/provider/artiste_provider.dart';
 import 'package:tp3/provider/user_provider.dart';
 
+import 'aristes/listeFavoris.dart';
 import 'form/connexion.dart';
 import 'home/home_screen.dart';
 
@@ -46,7 +47,8 @@ class Twistic extends StatefulWidget {
           //Connexion.routeName:(_)=>  Connexion(),
           Inscription.routeName :(_)=> Inscription(),
           ArtistesDetails.routeName:(_)=>  ArtistesDetails(),
-          Player.routeName:(_)=> Player()
+          Player.routeName:(_)=> Player(),
+          ListeFavoris.routeName: (_)=> ListeFavoris()
         },
 
       ),
