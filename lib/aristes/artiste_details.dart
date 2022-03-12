@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:tp3/commentaires/commentaire.dart';
 import 'package:tp3/home/home_screen.dart';
 import 'package:tp3/player/player_page.dart';
 import 'package:tp3/provider/artiste_provider.dart';
@@ -25,9 +26,9 @@ class _ArtistesDetailsState extends State<ArtistesDetails> {
     final String _artiste = _artisteDetail['fields']['artistes'];
     final String _salle = _artisteDetail['fields']['1ere_salle'];
     final String _origine = _artisteDetail['fields']['origine_pays1'];
+    final String _recordid = _artisteDetail['recordid'];
     final String _date = _artisteDetail['fields']['1ere_date'];
-    final String _url = _artisteDetail['fields']['spotify'] as String;
-
+    final String _url =  _artisteDetail['fields']['spotify'] !=null ? _artisteDetail['fields']['spotify'] : "google.com";
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
@@ -48,9 +49,11 @@ class _ArtistesDetailsState extends State<ArtistesDetails> {
             children: [
               HeaderSection(
                 artiste: _artiste,
-                url: _url,
+                url: _url ,
               ),
               PlayListSection(date: _date, origine: _origine, salle: _salle, artiste: _artiste),
+              SizedBox(height: 20.0,),
+              Commentaire(recordid: _recordid,),
             ],
           ),
         ),
@@ -60,17 +63,17 @@ class _ArtistesDetailsState extends State<ArtistesDetails> {
 
 class HeaderSection extends StatelessWidget {
   final String artiste;
-  final String url;
+  final String? url;
 
   HeaderSection({
     required this.artiste,
-    required this.url,
+      this.url,
   });
 
   @override
   Widget build(BuildContext context) {
     void _launchLink() async {
-      final url = "https://" + this.url;
+      final url = "https://" + this.url!;
       if (await canLaunch(url)) {
         await launch(url);
       } else {
@@ -162,7 +165,6 @@ class _PlayListSectionState extends State<PlayListSection> {
               Container(
                 child: ElevatedButton(
                   onPressed: () {
-                    print(artisteProvider.fetchArtisteName(widget.artiste));
                     artisteProvider.fetchArtisteName(widget.artiste);
 
                     if (ArtisteProvider.ajouterName == false) {
@@ -170,13 +172,18 @@ class _PlayListSectionState extends State<PlayListSection> {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                           content: Text('artiste ajouté'),
                           backgroundColor: Colors.green,
-                          dismissDirection: DismissDirection.up));
+                           ));
+                      ArtisteProvider.ajouterName = true;
+                      Navigator.pop(context);
 
                     } else if (ArtisteProvider.ajouterName == true) {
+
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                           content: Text("l'artiste a déja été ajouté"),
                           backgroundColor: Colors.red,
-                          dismissDirection: DismissDirection.up));
+                           ));
+                      ArtisteProvider.ajouterName = false;
+
                     }
                   },
                   style: ElevatedButton.styleFrom(

@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:logger/logger.dart';
 
 
 class ArtisteProvider extends ChangeNotifier {
@@ -13,7 +14,6 @@ class ArtisteProvider extends ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   List<DatabaseEvent> _artistes = [];
    static  bool ajouterName = false;
-  static  bool ajouterEmail = false;
 
 
   UnmodifiableListView<DatabaseEvent> get artistes => UnmodifiableListView(_artistes);
@@ -64,11 +64,13 @@ class ArtisteProvider extends ChangeNotifier {
           .where("email", isEqualTo: email)
           .get();
 
-       if(_result.docs.first.exists) {
-          ajouterName = true;
+       if(_result.size == 0) {
+        print(" eeeee ${_result.size}");
+          ajouterName = false;
        }
-       else{
-         ajouterName = false;
+       else  if(_result.size > 0) {
+         print("rrrrrrrrr ${_result.size}");
+         ajouterName = true;
        }
     } catch (e) {
       print("Failed to find artiste: $e");
