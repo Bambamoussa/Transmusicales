@@ -60,7 +60,7 @@ Future<void> submitForm()async {
                 ),
                 TextFormField(
                   decoration: const InputDecoration(
-                      labelText: "password password avec 6 caracteres",
+                      labelText: "password avec 6 caracteres",
                       border: OutlineInputBorder()
                   ),
                   validator: (value)  {

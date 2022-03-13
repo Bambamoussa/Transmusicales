@@ -1,7 +1,19 @@
-contributors : 
-BAMBA MOUSSA
+developpers : 
+Moussa Bamba
+Mel Jean Theodore Essoh
+features developed
+- login
+- sign in
+- sign out  
+- list of artistes
+- informations and details of artistes 
+- browse and sign in to google
+- add artist to favorites list
+- add comments
+- see comments
+- add rating
+- favorite artist list
 
-ESSOH 
 # Transmusical
 
 A new Flutter project.

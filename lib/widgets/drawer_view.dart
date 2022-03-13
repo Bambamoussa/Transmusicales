@@ -39,14 +39,14 @@ class DrawerView extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.person_add_disabled),
-            title: const Text('deconnecter',style: TextStyle(fontSize: 20)),
+            title: const Text('se deconnecter',style: TextStyle(fontSize: 20)),
             onTap: () {
               userProvider.signOut();
               Navigator.pushNamed(context, Connexion.routeName);
             },
           ),
           ListTile(
-            leading: Icon(Icons.person_add_disabled),
+            leading: Icon(Icons.favorite, color: Colors.red),
             title: const Text('favoris',style: TextStyle(fontSize: 20)),
             onTap: () {
               Navigator.pushNamed(context, ListeFavoris.routeName);
