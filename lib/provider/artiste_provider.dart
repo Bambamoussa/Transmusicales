@@ -65,17 +65,19 @@ class ArtisteProvider extends ChangeNotifier {
           .get();
 
        if(_result.size == 0) {
-        print(" eeeee ${_result.size}");
           ajouterName = false;
+          notifyListeners();
        }
        else  if(_result.size > 0) {
-         print("rrrrrrrrr ${_result.size}");
          ajouterName = true;
+         notifyListeners();
        }
     } catch (e) {
       print("Failed to find artiste: $e");
     }
   }
 
-
+  Future searchArtiste(String query){
+    return _database.collection("artiste").where("fields.artistes", isEqualTo:query).get();
+  }
 }

@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 class CommentaireProvider extends ChangeNotifier{
   final FirebaseFirestore _database = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  static double valeur = 0.0;
 
   Future commentaire(String recordid, String commentairemsg  ) async {
     try {
@@ -32,25 +33,23 @@ class CommentaireProvider extends ChangeNotifier{
     }
   }
 
-  fectRating(String recordid) {
+  fectRating(String recordid) async {
     try {
-      var counter = 0.0;
-      var ratingSize =0;
-       _database.collection('Rating')
+      var count = 0.0;
+      var  data= await _database.collection('Rating')
           .where("recordid",isEqualTo:recordid)
-          .snapshots().map((event) {
-            event.docs.map((e) {
-              ratingSize = e.data().length;
-             counter = counter + e.data()['rating'];
-
-            });
+          .get();
+      data.docs.forEach((element) {
+       count = count + element.data()["rating"];
       });
-
-       return counter/ratingSize;
+      valeur = (count/data.size);
+      notifyListeners();
     }catch(e){
       print("Failed to find rating: $e");
     }
   }
+
+
   addRating(double rating,String artisteName, String recordid) async {
     try {
       final _email = _auth.currentUser!.email!;

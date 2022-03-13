@@ -19,6 +19,7 @@ class Commentaire extends StatefulWidget {
 }
 
 class _CommentaireState extends State<Commentaire> {
+
   double value = 3.5;
   TextEditingController commentaireController = TextEditingController();
 
@@ -30,9 +31,9 @@ class _CommentaireState extends State<Commentaire> {
     Future<void> addRating(double rating, String artisteName, String recordid) async {
       commentaireProvider.addRating(rating, artisteName, recordid);
     }
+
     ratingMean(String recordid){
-      final _ratingList = commentaireProvider.fectRating(recordid);
-             print("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb  $_ratingList ");
+      commentaireProvider.fectRating(recordid);
     }
     Future<void> addCommentaire() async {
       if (commentaireController.text.length > 0) {
@@ -107,7 +108,7 @@ class _CommentaireState extends State<Commentaire> {
             addRating(rating, widget.artisteName, widget.recordid);
             ratingMean(widget.recordid);
             setState(() {
-              value = rating;
+              value =CommentaireProvider.valeur ;
             });
           },
           starBuilder: (index, color) => Icon(
