@@ -31,4 +31,40 @@ class CommentaireProvider extends ChangeNotifier{
       print("Failed to find recordid: $e");
     }
   }
+
+  fectRating(String recordid) {
+    try {
+      var counter = 0.0;
+      var ratingSize =0;
+       _database.collection('Rating')
+          .where("recordid",isEqualTo:recordid)
+          .snapshots().map((event) {
+            event.docs.map((e) {
+              ratingSize = e.data().length;
+             counter = counter + e.data()['rating'];
+
+            });
+      });
+
+       return counter/ratingSize;
+    }catch(e){
+      print("Failed to find rating: $e");
+    }
+  }
+  addRating(double rating,String artisteName, String recordid) async {
+    try {
+      final _email = _auth.currentUser!.email!;
+      var ratingUser = _database.collection('Rating');
+
+      await ratingUser.add({
+         'rating':rating,
+        'email':_email,
+        'recordid':recordid,
+        'artisteName':artisteName
+      });
+    }
+    catch (e) {
+      print("Failed to add commentaire: $e");
+    }
+  }
 }

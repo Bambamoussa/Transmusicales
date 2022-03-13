@@ -30,7 +30,7 @@ class _ConnexionState extends State<Connexion> {
       }
       else{
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('mot de passe invalide'), backgroundColor: Colors.red,),
+          const SnackBar(content: Text('mot de passe  ou email invalide'), backgroundColor: Colors.red,),
         );
       }
     }

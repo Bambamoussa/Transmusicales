@@ -181,13 +181,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.4"
-  flutter_rating_bar:
+  flutter_rating_stars:
     dependency: "direct main"
     description:
-      name: flutter_rating_bar
+      name: flutter_rating_stars
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.0"
+    version: "1.0.3+4"
   flutter_test:
     dependency: "direct dev"
     description: flutter

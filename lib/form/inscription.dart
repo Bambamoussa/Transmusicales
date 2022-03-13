@@ -27,7 +27,7 @@ Future<void> submitForm()async {
     }
     else{
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('cet utilisateur existe déja'), backgroundColor: Colors.red,),
+        const SnackBar(content: Text('cet utilisateur existe déja ou mot de passe invalide'), backgroundColor: Colors.red,),
       );
     }
   }
@@ -60,12 +60,12 @@ Future<void> submitForm()async {
                 ),
                 TextFormField(
                   decoration: const InputDecoration(
-                      labelText: "password",
+                      labelText: "password password avec 6 caracteres",
                       border: OutlineInputBorder()
                   ),
                   validator: (value)  {
                     if(value == null || value!.isEmpty){
-                      return "veuillez entrer un password";
+                      return "veuillez entrer un password de 6 caracteres";
                     }
 
                   },

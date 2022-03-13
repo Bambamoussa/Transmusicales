@@ -53,7 +53,7 @@ class _ArtistesDetailsState extends State<ArtistesDetails> {
               ),
               PlayListSection(date: _date, origine: _origine, salle: _salle, artiste: _artiste),
               SizedBox(height: 20.0,),
-              Commentaire(recordid: _recordid,),
+              Commentaire(recordid: _recordid,artisteName: _artiste,),
             ],
           ),
         ),
